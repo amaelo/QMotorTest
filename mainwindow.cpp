@@ -17,5 +17,7 @@ MainWindow::~MainWindow()
 
      // New window
      QMainWindow new window;
+
+     Qint entier = 78;
 }
 
