@@ -19,5 +19,7 @@ MainWindow::~MainWindow()
      QMainWindow new window;
 
      Qint entier = 79;
+
+     QDebug << "OK"
 }
 
