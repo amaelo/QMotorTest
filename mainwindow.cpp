@@ -19,7 +19,10 @@ MainWindow::~MainWindow()
      QMainWindow new window;
 
      Qint entier = 79;
+<<<<<<< HEAD
 
      QDebug << "OK"
+=======
+>>>>>>> modif_entier
 }
 
