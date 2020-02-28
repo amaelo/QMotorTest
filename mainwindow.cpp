@@ -11,5 +11,11 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
      delete ui;
+
+     // Add new fucntion
+     delete ui;
+
+     // New window
+     QMainWindow new window;
 }
 
