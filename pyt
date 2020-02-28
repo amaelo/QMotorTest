@@ -3,3 +3,4 @@ from PySide2 import QtWidgets
 
 class myClass:
     def __init__(self):
+       ser = "toto"
