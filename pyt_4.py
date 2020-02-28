@@ -4,3 +4,5 @@
 #     pass
 
 def pyt4():
+       print "branch1"
+       "branch3"
