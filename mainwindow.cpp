@@ -18,7 +18,7 @@ MainWindow::~MainWindow()
      // New window
      QMainWindow new window;
 
-     Qint entier = 79;
+     Qint entier = 80;
 
      QDebug << "OK"
 }
