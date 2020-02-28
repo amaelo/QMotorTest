@@ -2,3 +2,6 @@
 
 # if__name__ == "__main__":
 #     pass
+
+def main():
+       print "ok"
