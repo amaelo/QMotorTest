@@ -8,3 +8,4 @@ def main():
        print "2"
        "re"
        "test"
+       "autre"
