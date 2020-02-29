@@ -27,5 +27,6 @@ MainWindow::~MainWindow()
                "agaon"
 
                "next2"
+               "next4"
 }
 
