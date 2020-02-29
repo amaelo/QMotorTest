@@ -21,5 +21,7 @@ MainWindow::~MainWindow()
      Qint entier = 80;
 
      QDebug << "OK"
+
+     "continue"
 }
 
