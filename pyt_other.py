@@ -10,3 +10,4 @@ def main():
        "test"
        "autre"
        "nextdev"
+       "next3"
