@@ -23,5 +23,7 @@ MainWindow::~MainWindow()
      QDebug << "OK"
 
      "continue"
+
+               "agaon"
 }
 
