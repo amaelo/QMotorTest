@@ -7,4 +7,5 @@ def main():
        print "ok"
        print "2"
        "re"
+
        "autre"
