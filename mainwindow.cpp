@@ -13,17 +13,17 @@ MainWindow::~MainWindow()
      delete ui;
 
      // Add new fucntion
-     delete ui;
+//     delete ui;
 
-     // New window
-     QMainWindow new window;
+//     // New window
+//     QMainWindow new window;
 
-     Qint entier = 80;
+//     Qint entier = 80;
 
-     QDebug << "OK"
+//     QDebug << "OK"
 
 
 
-               "agaon"
+//               "agaon"
 }
 
