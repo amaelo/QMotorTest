@@ -14,20 +14,11 @@ MainWindow::~MainWindow()
      delete ui;
 
      // Add new fucntion
-     delete ui;
 
-     // New window
-     QMainWindow new window;
-
-     Qint entier = 80;
-
-     QDebug << "OK"
-
-
-
-               "agaon"
-
-               "next2"
-               "next4"
 }
 
+
+void MainWindow::on_toolButton_clicked()
+{
+     QMessageBox::information(nullptr, "titl", "test OK");
+}
