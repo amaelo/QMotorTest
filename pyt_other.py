@@ -9,3 +9,5 @@ def main():
        "re"
        "test"
        "autre"
+       "nextdev"
+       "next3"
