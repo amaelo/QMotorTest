@@ -261,7 +261,7 @@ border-color: rgb(245, 245, 245);</string>
      </rect>
     </property>
     <property name="title">
-     <string>New dev</string>
+     <string>Master</string>
     </property>
    </widget>
    <widget class="QToolButton" name="toolButton_3">
