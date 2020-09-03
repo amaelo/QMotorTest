@@ -33,4 +33,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES += \
        pyt \
        pyt_4.py \
-       pyt_other.py
+       pyt_other.py \
+       python/pyt_4.py
+
+RESOURCES += \
+       ressources.qrc

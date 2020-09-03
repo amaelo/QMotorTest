@@ -1,2 +1,5 @@
-<!DOCTYPE RCC>
-<RCC version="1.0"/>
+<RCC>
+    <qresource prefix="/python">
+        <file>pyt_4.py</file>
+    </qresource>
+</RCC>

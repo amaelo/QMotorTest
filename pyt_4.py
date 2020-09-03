@@ -1,8 +1,6 @@
-# This Python file uses the following encoding: utf-8
 
-# if__name__ == "__main__":
-#     pass
+file = open("/home/kama/applications/_myAppli/QMotorTest/txt", "r")
+lines = file.readlines()
 
-def pyt4():
-       print "branch1"
-       "branch3"
+file.close()
+print(lines)
