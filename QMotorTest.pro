@@ -31,6 +31,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
+       file1.txt \
+       file2.txt \
        pyt \
        pyt_4.py \
        pyt_other.py \
