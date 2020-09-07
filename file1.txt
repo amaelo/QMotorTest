@@ -16,3 +16,5 @@ featureA
 featureAZ
 
 featureAZE
+
+feature_B
