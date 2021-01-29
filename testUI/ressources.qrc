@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file alias="img">IHM_Volvo_3.png</file>
+    </qresource>
+</RCC>

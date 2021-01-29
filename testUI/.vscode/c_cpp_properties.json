@@ -1,0 +1,25 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "C:\\Program Files\\WindowsApps\\ArduinoLLC.ArduinoIDE_1.8.42.0_x86__mdqgnx93n4wtt\\tools\\**",
+                "C:\\Users\\ama\\Documents\\Arduino\\libraries\\**",
+                "C:\\Program Files\\WindowsApps\\ArduinoLLC.ArduinoIDE_1.8.42.0_x86__mdqgnx93n4wtt\\libraries\\**",
+                "C:\\Program Files\\WindowsApps\\ArduinoLLC.ArduinoIDE_1.8.42.0_x86__mdqgnx93n4wtt\\hardware\\tools\\**",
+                "C:\\Program Files\\WindowsApps\\ArduinoLLC.ArduinoIDE_1.8.42.0_x86__mdqgnx93n4wtt\\hardware\\arduino\\avr\\**",
+                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\**",
+                "C:\\Program Files (x86)\\Arduino\\hardware\\tools\\**",
+                "C:\\Program Files (x86)\\Arduino\\libraries\\**",
+                "C:\\Program Files (x86)\\Arduino\\tools\\**"
+            ],
+            "forcedInclude": [
+                "C:\\Program Files\\WindowsApps\\ArduinoLLC.ArduinoIDE_1.8.42.0_x86__mdqgnx93n4wtt\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h",
+                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h"
+            ],
+            "defines": [
+                "USBCON"
+            ]
+        }
+    ]
+}

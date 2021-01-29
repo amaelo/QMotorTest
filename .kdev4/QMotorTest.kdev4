@@ -1,0 +1,15 @@
+[Buildset]
+BuildItems=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x01\x00\x00\x00\x0b\x00\x00\x00\x00\x01\x00\x00\x00\x14\x00Q\x00M\x00o\x00t\x00o\x00r\x00T\x00e\x00s\x00t)
+
+[QMake_Builder]
+Build_Folder=/home/kama/applications/_myAppli/QMotorTest/build
+Build_Type=0
+Extra_Arguments=&& /usr/bin/make qmake_all
+Install_Prefix=/home/kama/applications/_myAppli/install
+QMake_Binary=/home/kama/Qt/5.7/gcc_64/bin/qmake
+
+[QMake_Builder][/home/kama/applications/_myAppli/QMotorTest/build]
+Build_Type=0
+Extra_Arguments=&& /usr/bin/make qmake_all
+Install_Prefix=/home/kama/applications/_myAppli/install
+QMake_Binary=/home/kama/Qt/5.7/gcc_64/bin/qmake
