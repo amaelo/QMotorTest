@@ -166,17 +166,21 @@ void MainWindow::readData()
      }
 
      val = serialPort->readAll();
-     speed_ms = perim * val.toLong() / 25;
+     value = val.toDouble();
+
+     speed_ms = perim * value / 25;
      speed_kmh = speed_ms * 3.6;
      ui->lcdSpeed->display(speed_kmh);
 
-     //    if (rec == true && val.toInt() > 20)
+
      if (rec == true)
      {
           dataX.append(++inc);
-          dataY.append(val.toDouble());
+          dataY.append(value);
           ui->lcdCount->display(inc);
-          //        dataY.append(speed_kmh);
+
+          qDebug() << value;
+          previousValue = value;
      }
 }
 
@@ -204,7 +208,7 @@ void MainWindow::on_startButton_clicked()
 
      serialPort = new QSerialPort(this);
      serialPort->setPortName("/dev/ttyACM0");
-     serialPort->setBaudRate(1000000);
+     serialPort->setBaudRate(2000000);
      serialPort->setDataBits(QSerialPort::Data8);
      serialPort->setParity(QSerialPort::NoParity);
      serialPort->setStopBits(QSerialPort::OneStop);

@@ -64,6 +64,8 @@ private:
     float speed_ms;
     int speed_kmh;
     int inc;
+    long value;
+    long previousValue;
     bool rec;
 
     QVector<double> dataX;
