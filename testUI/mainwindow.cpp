@@ -6,7 +6,7 @@
 #include <QPushButton>
 #include <QDebug>
 #include <QList>
-
+#include <QFile>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -173,7 +173,7 @@ void MainWindow::readData()
      ui->lcdSpeed->display(speed_kmh);
 
 
-     if (rec == true)
+     if (rec == true && speed_kmh > 40)
      {
           dataX.append(++inc);
           dataY.append(value);
@@ -190,6 +190,7 @@ void MainWindow::on_startButton_clicked()
      pen.setWidth(2);
 
      ui->customPlot->setBackground(QBrush(Qt::black));
+     //ui->customPlot->
      ui->customPlot->xAxis->setBasePen(QPen(Qt::white));
      ui->customPlot->xAxis->setTickLabelColor(QColor(Qt::white));
      ui->customPlot->xAxis->setTickPen(QPen(Qt::white));
@@ -207,7 +208,8 @@ void MainWindow::on_startButton_clicked()
      //    ui->labelPerim->setText(QString::(perim));
 
      serialPort = new QSerialPort(this);
-     serialPort->setPortName("/dev/ttyACM0");
+//     serialPort->setPortName("/dev/ttyACM0");
+     serialPort->setPortName("COM3");
      serialPort->setBaudRate(2000000);
      serialPort->setDataBits(QSerialPort::Data8);
      serialPort->setParity(QSerialPort::NoParity);
@@ -259,4 +261,15 @@ void MainWindow::on_plotButton_clicked()
      ui->customPlot->xAxis->rescale(false);
      ui->customPlot->yAxis->rescale(false);
      ui->customPlot->replot();
+}
+
+void MainWindow::on_saveButton_clicked()
+{
+    QFile file("C:\\Users\\ama\\Documents\\qt-projects\\QMotorTest\\rec.txt");
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) return;
+    QTextStream out(&file);
+    for (int i = 0; i < dataY.size(); i++)
+    {
+        out << dataY[i] << "\n";
+    }
 }

@@ -46,6 +46,8 @@ private slots:
 
     void on_plotButton_clicked();
 
+    void on_saveButton_clicked();
+
 signals :
     void startSimulator();
 
