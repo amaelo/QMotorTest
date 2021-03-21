@@ -285,7 +285,7 @@ background-color: rgb(130, 108, 255);</string>
     <property name="geometry">
      <rect>
       <x>1590</x>
-      <y>390</y>
+      <y>410</y>
       <width>191</width>
       <height>91</height>
      </rect>
@@ -312,7 +312,7 @@ background-color: rgb(130, 108, 255);</string>
     <property name="geometry">
      <rect>
       <x>1590</x>
-      <y>600</y>
+      <y>620</y>
       <width>191</width>
       <height>71</height>
      </rect>
@@ -333,7 +333,7 @@ background-color: rgb(130, 108, 255);</string>
     <property name="geometry">
      <rect>
       <x>1590</x>
-      <y>780</y>
+      <y>800</y>
       <width>191</width>
       <height>71</height>
      </rect>
@@ -355,7 +355,7 @@ background-color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>1590</x>
-      <y>690</y>
+      <y>710</y>
       <width>191</width>
       <height>71</height>
      </rect>
@@ -377,7 +377,7 @@ background-color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>1590</x>
-      <y>510</y>
+      <y>530</y>
       <width>191</width>
       <height>71</height>
      </rect>
@@ -397,10 +397,10 @@ background-color: rgb(255, 255, 255);</string>
    <widget class="QLCDNumber" name="lcdCount">
     <property name="geometry">
      <rect>
-      <x>1613</x>
-      <y>310</y>
-      <width>161</width>
-      <height>31</height>
+      <x>1600</x>
+      <y>280</y>
+      <width>241</width>
+      <height>61</height>
      </rect>
     </property>
     <property name="layoutDirection">
@@ -417,7 +417,7 @@ background-color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>1600</x>
-      <y>890</y>
+      <y>910</y>
       <width>161</width>
       <height>51</height>
      </rect>
@@ -427,6 +427,36 @@ background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>Save</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>1760</x>
+      <y>350</y>
+      <width>71</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>21</pointsize>
+     </font>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>rpm</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::PlainText</enum>
+    </property>
+    <property name="scaledContents">
+     <bool>false</bool>
     </property>
    </widget>
   </widget>

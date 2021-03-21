@@ -11,17 +11,19 @@ WINDOW_SIZE = 30
 RATIO = 5
 
 
-# folder = ("C:/Users/ama/Documents/qt-projects/QMotorTest")
-folder = "/home/kama/applications/_myAppli/QMotorTest"
-rec1path = "rec 4.txt"
+folder = 'C:/Users/ama/Documents/qt-projects/QMotorTest/recorders'
+# folder = "/home/kama/applications/_myAppli/QMotorTest"
+rec1path = "rec 16.txt"
 
 file1path = os.path.join(folder,rec1path)
 
 list1 = []
 with open(file1path,mode='r') as f1:
     list1 = f1.readlines()
-   
-values = [int(v) for v in list1 if int(v) > 200]
+
+list1int = [int(v) for v in list1 ]
+
+values = [int(v) for v in list1 if int(v) > 200 ]
 time = numpy.arange(0, len(values), 1)
 time_s = [val / 100 for val in time]
 speed_kmh = [3.6 * (v / TOPS) * PERIM / SAMPLE for v in values]
@@ -107,7 +109,7 @@ correction_ramp_hp.pop(0)
 
 xValues = speedEngine_rpm
 yValues = power_corr_hp
-yValues2 = torqueEngine_nm
+yValues2 = power_hp
 yValues3 = correction_ramp_hp
 
 fig, ax = plt.subplots()
@@ -116,8 +118,8 @@ ax.plot(xValues, yValues2, color='tab:red')
 ax.plot(xValues, yValues3, color='tab:green')
 
 
-ax.set(xlabel='time (s)', ylabel='nb points (nb)',
-       title='About as simple as it gets, folks')
+ax.set(xlabel='rpm', ylabel='puissance (ch)',
+       title=rec1path)
 ax.grid()
 
 # fig.savefig("test.png")

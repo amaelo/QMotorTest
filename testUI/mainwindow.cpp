@@ -170,10 +170,14 @@ void MainWindow::readData()
 
      speed_ms = perim * value / 25;
      speed_kmh = speed_ms * 3.6;
+     int speed_rpm = (5 * 60 * value / 2500) / 0.01;
+
      ui->lcdSpeed->display(speed_kmh);
+     ui->lcdCount->display(speed_rpm);
 
+//     if (rec == true && speed_kmh > 40 && value < 2000)
+         if (rec == true && value > 100)
 
-     if (rec == true && speed_kmh > 40)
      {
           dataX.append(++inc);
           dataY.append(value);
