@@ -1,0 +1,25 @@
+#include <FreqCount.h>
+
+long count;
+int table [1];
+int i = 0;
+
+void setup() {
+  Serial.begin(2000000);
+  FreqCount.begin(10);
+  Serial.flush();
+  analogReference(INTERNAL);
+}
+
+void loop()
+{
+  if (FreqCount.available())
+  {
+    Serial.print("_" + String(FreqCount.read()) + ";" + analogRead(1) + "_");
+    //Serial.write(FreqCount.read());
+    //Serial.write(109);
+    //count = FreqCount.read();
+    //Serial.flush();
+    //Serial.println(count);
+  }
+}

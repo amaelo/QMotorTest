@@ -20,12 +20,14 @@ SOURCES += \
     mainwindow.cpp \
     mywidget.cpp \
     qcustomplot.cpp \
+    serialcommunication.cpp \
     simulator.cpp
 
 HEADERS += \
     mainwindow.h \
     mywidget.h \
     qcustomplot.h \
+    serialcommunication.h \
     simulator.h
 
 FORMS += \
@@ -37,7 +39,8 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-DISTFILES +=
+DISTFILES += \
+       arduino
 
 RESOURCES += \
     ressources.qrc

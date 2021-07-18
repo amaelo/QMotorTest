@@ -6,7 +6,6 @@
 #include <QPushButton>
 #include <QDebug>
 #include <QList>
-#include <QProcess>
 
 
 
@@ -158,45 +157,38 @@ void MainWindow::on_pushButton_6_clicked()
 }
 
 
-void MainWindow::readData(QByteArray frame)
+void MainWindow::readData()
 {
      if (rec == true)
      {
-          if (dataX.size() > 2000)
-          {
-               dataX.pop_front();
-               dataY.pop_front();
-               dataY2.pop_front();
-          }
-
           ui->customPlot->graph(0)->setData(dataX, dataY, true);
           ui->customPlot->graph(1)->setData(dataX, dataY2, true);
           ui->customPlot->xAxis->rescale(true);
           ui->customPlot->yAxis->rescale(true);
-//          ui->customPlot->yAxis2->rescale(true);
+          ui->customPlot->yAxis2->rescale(true);
           ui->customPlot->replot();
      }
 
 //     val = serialPort->readLine();
 
 //     bool ok;
-//     val = serialPort->readLine();
-////     ui->lcdCount->display(inc++);
+     val = serialPort->readLine();
+     ui->lcdCount->display(inc++);
 
-//     if (val.startsWith('_') && val.endsWith('_') && val != '_')
-//     {
-////          qDebug() << val;
+     if (val.startsWith('_') && val.endsWith('_') && val != '_')
+     {
+//          qDebug() << val;
 
-//          val.remove('_');
-//          qDebug() << frame;
+          val.remove('_');
 
-          valSplitted = frame.split(';');
-          val1 = valSplitted[0];
-          val2 = valSplitted[1];
+          valSplit = val.split(";");
+          val1 = valSplit[0];
+          val2 = valSplit[1];
 
           value = val1.toDouble();
           value2 = val2.toDouble();
-          if (value2 > 1024) { qDebug() << value2; }
+
+          if (val2 > 1024) { qDebug() << val2; }
 
           speed_ms = perim * value / 25;
           speed_kmh = speed_ms * 3.6;
@@ -207,18 +199,18 @@ void MainWindow::readData(QByteArray frame)
           {
                dataX.append(++inc);
                dataY.append(value);
-               dataY2.append(1.1 * value2 / 1024);
+               dataY2.append(value2);
 
 //               ui->lcdCount->display(inc);
 
 //               qDebug() << value << "\n";
                previousValue = value;
           }
-//     }
-//     else
-//     {
-//          qDebug() << "Error : °" << inc << " Value : " << val;
-//     }
+     }
+     else
+     {
+          qDebug() << "Error : °" << inc << " Value : " << val;
+     }
 }
 
 void MainWindow::on_startButton_clicked()
@@ -237,18 +229,17 @@ void MainWindow::on_startButton_clicked()
      ui->customPlot->xAxis->setTickPen(QPen(Qt::white));
      ui->customPlot->xAxis->setSubTickPen(QPen(Qt::white));
 
-     ui->customPlot->yAxis->setBasePen(QPen(Qt::white));
+//     ui->customPlot->yAxis->setBasePen(QPen(Qt::red));
      ui->customPlot->yAxis->setTickLabelColor(QColor(Qt::red));
      ui->customPlot->yAxis->setTickPen(QPen(Qt::red));
      ui->customPlot->yAxis->setSubTickPen(QPen(Qt::red));
      ui->customPlot->yAxis->setTickLabels(true);
 
-     ui->customPlot->yAxis2->setBasePen(QPen(Qt::white));
+//     ui->customPlot->yAxis2->setBasePen(QPen(Qt::green));
      ui->customPlot->yAxis2->setTickLabelColor(QColor(Qt::green));
      ui->customPlot->yAxis2->setTickPen(QPen(Qt::green));
      ui->customPlot->yAxis2->setSubTickPen(QPen(Qt::green));
      ui->customPlot->yAxis2->setTickLabels(true);
-     ui->customPlot->yAxis2->setRange(0, 1);
 
      ui->customPlot->graph(1)->setValueAxis(ui->customPlot->yAxis2);
 
@@ -257,26 +248,18 @@ void MainWindow::on_startButton_clicked()
 
      rec = false;
      //    ui->labelPerim->setText(QString::(perim));
-     RS232com = new serialcommunication(this, "/dev/ttyACM0", 2000000);
 
-     RS232thread = new QThread(this);
-     RS232com->moveToThread(RS232thread);
-     RS232thread->start();
+     serialPort = new QSerialPort(this);
+     serialPort->setPortName("/dev/ttyACM0");
+     serialPort->setBaudRate(2000000);
+     serialPort->setDataBits(QSerialPort::Data8);
+     serialPort->setParity(QSerialPort::NoParity);
+     serialPort->setStopBits(QSerialPort::OneStop);
+     serialPort->setFlowControl(QSerialPort::NoFlowControl);
+     serialPort->open(QSerialPort::QIODevice::ReadOnly);
 
-     RS232com->StartCommunication();
-
-     connect(RS232com, &serialcommunication::newFrameRS232, this, &MainWindow::readData);
-//     serialPort = new QSerialPort(this);
-//     serialPort->setPortName("/dev/ttyACM0");
-//     serialPort->setBaudRate(2000000);
-//     serialPort->setDataBits(QSerialPort::Data8);
-//     serialPort->setParity(QSerialPort::NoParity);
-//     serialPort->setStopBits(QSerialPort::OneStop);
-//     serialPort->setFlowControl(QSerialPort::NoFlowControl);
-//     serialPort->open(QSerialPort::QIODevice::ReadOnly);
-
-//     serialPort->waitForReadyRead();
-//     connect(serialPort, &QSerialPort::readyRead, this, &MainWindow::readData);
+     serialPort->waitForReadyRead();
+     connect(serialPort, &QSerialPort::readyRead, this, &MainWindow::readData);
 
 }
 
@@ -301,42 +284,6 @@ void MainWindow::on_razButton_clicked()
 
 void MainWindow::on_plotButton_clicked()
 {
-     QStringList args;
-     QString arg2 = "";
-     QString arg3 = "";
-
-#ifdef Q_OS_LINUX
-     QString pythonPath = "/home/kama/anaconda3/bin/python";
-     args << "/home/kama/applications/_myAppli/QMotorTest/testUI/PlotMeasurments.py";
-#else
-
-#endif
-
-     for (int i = 0; i < dataX.length(); ++i)
-     {
-          arg2.append(QString::number(dataY[i]) + ";");
-          arg3.append(QString::number(dataY2[i]) + ";");
-     }
-     args << arg2 << arg3 ;
-
-     QProcess proc;
-     proc.start(pythonPath, args);
-     proc.waitForStarted();
-     proc.waitForFinished();
-     QString result = proc.readAll();
-
-     QStringList strX = result.split("_")[0].split(";");
-     QStringList strY = result.split("_")[1].split(";");
-
-     dataX.clear();
-     dataY.clear();
-
-     for(int i = 0; i < strX.length(); i++)
-     {
-          dataX.append(strX[i].toDouble());
-          dataY.append(strY[i].toDouble());
-     }
-
      QPen pen(Qt::red);
      pen.setWidth(2);
 
@@ -351,23 +298,9 @@ void MainWindow::on_plotButton_clicked()
      ui->customPlot->yAxis->setTickPen(QPen(Qt::red));
      ui->customPlot->yAxis->setSubTickPen(QPen(Qt::red));
 
-     QCPCurve *newCurve = new QCPCurve(ui->customPlot->xAxis, ui->customPlot->yAxis);
-     const int pointCount = dataX.length();
-     QVector<QCPCurveData> dataCurve(pointCount);
-
-     for (int i = 0; i < pointCount; i++)
-     {
-          dataCurve[i] = QCPCurveData(i, dataX[i], dataY[i]);
-     }
-
-
-     newCurve->data()->set(dataCurve);
-//ui->customPlot->addPlottable(this->newCurve);
-//     ui->customPlot->cur
-     //ui->customPlot->graph(0)->setData(dataX, dataY, true);
+     ui->customPlot->graph(0)->setData(dataX, dataY, true);
      ui->customPlot->graph(0)->setPen(pen);
-
-     ui->customPlot->xAxis->setRange(dataX[0] - 100, ui->customPlot->xAxis->range().maxRange + 500);
-     ui->customPlot->yAxis->rescale(true);
+     ui->customPlot->xAxis->rescale(false);
+     ui->customPlot->yAxis->rescale(false);
      ui->customPlot->replot();
 }

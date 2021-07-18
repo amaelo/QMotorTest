@@ -12,8 +12,8 @@ RATIO = 5
 
 
 folder = 'C:/Users/ama/Documents/qt-projects/QMotorTest/recorders'
-# folder = "/home/kama/applications/_myAppli/QMotorTest"
-rec1path = "rec 16.txt"
+folder = "/home/kama/applications/_myAppli/QMotorTest/recorders/"
+rec1path = "rec 11.txt"
 
 file1path = os.path.join(folder,rec1path)
 
