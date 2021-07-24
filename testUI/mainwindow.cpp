@@ -7,7 +7,7 @@
 #include <QDebug>
 #include <QList>
 #include <QProcess>
-
+#include <QFileDialog>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -162,7 +162,7 @@ void MainWindow::readData(QByteArray frame)
 {
      if (rec == true)
      {
-          if (dataX.size() > 2000)
+          if (dataX.size() > 2500)
           {
                dataX.pop_front();
                dataY.pop_front();
@@ -302,22 +302,33 @@ void MainWindow::on_razButton_clicked()
 void MainWindow::on_plotButton_clicked()
 {
      QStringList args;
-     QString arg2 = "";
-     QString arg3 = "";
+     QString recPath = "";
 
 #ifdef Q_OS_LINUX
      QString pythonPath = "/home/kama/anaconda3/bin/python";
-     args << "/home/kama/applications/_myAppli/QMotorTest/testUI/PlotMeasurments.py";
+     args << "/home/kama/applications/_myAppli/QMotorTest/testUI/getValues.py";
+     recPath = "/home/kama/applications/_myAppli/QMotorTest/recorders";
 #else
-
+     QString pythonPath = "/home/kama/anaconda3/bin/python";
+     args << "/home/kama/applications/_myAppli/QMotorTest/testUI/getValues.py";
 #endif
 
-     for (int i = 0; i < dataX.length(); ++i)
+     QFileDialog dial(this,"Save recorder", recPath,"");
+     dial.setFileMode(QFileDialog::AnyFile);
+     QString fPath = dial.getSaveFileName();
+
+     QFile file(fPath);
+     if (file.open(QIODevice::WriteOnly))
      {
-          arg2.append(QString::number(dataY[i]) + ";");
-          arg3.append(QString::number(dataY2[i]) + ";");
+         QTextStream stream(&file);
+         for (int i = 0; i < dataY.length(); ++i)
+         {
+              stream << dataY[i] << "," << dataY2[i] << endl;
+         }
      }
-     args << arg2 << arg3 ;
+     file.close();
+
+     args << fPath;
 
      QProcess proc;
      proc.start(pythonPath, args);
@@ -326,19 +337,27 @@ void MainWindow::on_plotButton_clicked()
      QString result = proc.readAll();
 
      QStringList strX = result.split("_")[0].split(";");
-     QStringList strY = result.split("_")[1].split(";");
+     QStringList strY1 = result.split("_")[1].split(";");
+     QStringList strY2 = result.split("_")[2].split(";");
 
      dataX.clear();
      dataY.clear();
+     dataY2.clear();
 
      for(int i = 0; i < strX.length(); i++)
      {
           dataX.append(strX[i].toDouble());
-          dataY.append(strY[i].toDouble());
+          dataY.append(strY1[i].toDouble());
+          dataY2.append(strY2[i].toDouble());
      }
 
      QPen pen(Qt::red);
      pen.setWidth(2);
+
+     QPen pen2(Qt::green);
+     pen.setWidth(2);
+
+     ui->customPlot->axisRect()->setupFullAxesBox();
 
      ui->customPlot->setBackground(QBrush(Qt::black));
      ui->customPlot->xAxis->setBasePen(QPen(Qt::white));
@@ -346,28 +365,52 @@ void MainWindow::on_plotButton_clicked()
      ui->customPlot->xAxis->setTickPen(QPen(Qt::white));
      ui->customPlot->xAxis->setSubTickPen(QPen(Qt::white));
 
-     ui->customPlot->yAxis->setBasePen(QPen(Qt::red));
+     ui->customPlot->xAxis2->setBasePen(QPen(Qt::white));
+     ui->customPlot->xAxis2->setTickLabelColor(QColor(Qt::white));
+     ui->customPlot->xAxis2->setTickPen(QPen(Qt::white));
+     ui->customPlot->xAxis2->setSubTickPen(QPen(Qt::white));
+
+     ui->customPlot->yAxis->setBasePen(QPen(Qt::white));
      ui->customPlot->yAxis->setTickLabelColor(QColor(Qt::red));
      ui->customPlot->yAxis->setTickPen(QPen(Qt::red));
      ui->customPlot->yAxis->setSubTickPen(QPen(Qt::red));
 
-     QCPCurve *newCurve = new QCPCurve(ui->customPlot->xAxis, ui->customPlot->yAxis);
-     const int pointCount = dataX.length();
-     QVector<QCPCurveData> dataCurve(pointCount);
+     ui->customPlot->yAxis2->setBasePen(QPen(Qt::white));
+     ui->customPlot->yAxis2->setTickLabelColor(QColor(Qt::green));
+     ui->customPlot->yAxis2->setTickPen(QPen(Qt::green));
+     ui->customPlot->yAxis2->setSubTickPen(QPen(Qt::green));
+     ui->customPlot->yAxis2->setTickLabels(true);
+     ui->customPlot->yAxis2->setRange(0, 5);
 
-     for (int i = 0; i < pointCount; i++)
+     QCPCurve *newCurve = new QCPCurve(ui->customPlot->xAxis, ui->customPlot->yAxis);
+//     QCPCurve *newCurve2 = new QCPCurve(ui->customPlot->xAxis, ui->customPlot->yAxis2);
+
+     const int pointsCount = dataX.length();
+
+     QVector<QCPCurveData> dataCurve(pointsCount);
+//     QVector<QCPCurveData> dataCurve2(pointsCount);
+
+     for (int i = 0; i < pointsCount; i++)
      {
           dataCurve[i] = QCPCurveData(i, dataX[i], dataY[i]);
+//          dataCurve2[i] = QCPCurveData(i, dataX[i], dataY2[i]);
      }
 
-
      newCurve->data()->set(dataCurve);
+     newCurve->setPen(pen);
+//     newCurve2->data()->set(dataCurve2);
+
+     ui->customPlot->graph(1)->setValueAxis(ui->customPlot->yAxis2);
+
 //ui->customPlot->addPlottable(this->newCurve);
 //     ui->customPlot->cur
-     //ui->customPlot->graph(0)->setData(dataX, dataY, true);
-     ui->customPlot->graph(0)->setPen(pen);
+     ui->customPlot->graph(1)->setData(dataX, dataY2, true);
+     ui->customPlot->graph(1)->setPen(pen2);
 
      ui->customPlot->xAxis->setRange(dataX[0] - 100, ui->customPlot->xAxis->range().maxRange + 500);
+     ui->customPlot->xAxis->rescale(true);
      ui->customPlot->yAxis->rescale(true);
+     ui->customPlot->yAxis2->setRange(0, 5);
+
      ui->customPlot->replot();
 }
