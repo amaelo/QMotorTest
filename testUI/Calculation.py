@@ -13,14 +13,18 @@ def getCalculations(filePath):
     
     list1 = []
     with open(filePath,mode='r') as f1:
-        list1 = f1.readlines()
+        lines = f1.readlines()
+        
+    list1 = [ v.split(',')[0] for v in lines ]
+    list2 = [ v.split(',')[1] for v in lines ]
     
-    list1int = [int(v) for v in list1 ]
+    lambdaValues = [ float(v) for v in list2 ]
     
-    values = [int(v) for v in list1 if int(v) > 200 ]
+    # values = [ int(v) for v in list1 if int(v) > 200 ]
+    values = [ int(v) for v in list1]
     time = numpy.arange(0, len(values), 1)
-    time_s = [val / 100 for val in time]
-    speed_kmh = [3.6 * (v / TOPS) * PERIM / SAMPLE for v in values]
+    time_s = [ val / 100 for val in time ]
+    speed_kmh = [ 3.6 * (v / TOPS) * PERIM / SAMPLE for v in values ]
     
     speed_rps = [(v / TOPS) / SAMPLE for v in values]
     speed_rpm = [v * 60 for v in speed_rps]
@@ -98,4 +102,4 @@ def getCalculations(filePath):
         
     ##############################################################################################        
     
-    return speedEngine_rpm, power_corr_hp, power_hp, correction_ramp_hp
+    return speedEngine_rpm, power_corr_hp, lambdaValues, power_hp, correction_ramp_hp
