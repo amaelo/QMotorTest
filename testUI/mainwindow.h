@@ -67,6 +67,7 @@ private:
      QList<QByteArray> valSplitted;
      QString val1;
      QString val2;
+     float lambdaPrevious;
      float perim;
      float speed;
      float speed_ms;

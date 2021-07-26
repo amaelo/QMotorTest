@@ -9,6 +9,8 @@ import sys
 
 file1Path = sys.argv[1]
 
+# file1Path = "C:/Users/ama/Documents/qt-projects/QMotorTest/recorders/toto2"
+
 data1 = clc.getCalculations(file1Path)
 
 speedEngine1 = data1[0]

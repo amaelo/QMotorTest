@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1788</width>
-    <height>1046</height>
+    <width>1892</width>
+    <height>1142</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,8 +25,8 @@
      <rect>
       <x>170</x>
       <y>50</y>
-      <width>1351</width>
-      <height>921</height>
+      <width>1461</width>
+      <height>981</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -239,9 +239,9 @@ color: rgb(255, 255, 255);</string>
    <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
-      <x>1560</x>
+      <x>1640</x>
       <y>40</y>
-      <width>211</width>
+      <width>221</width>
       <height>931</height>
      </rect>
     </property>
@@ -282,9 +282,9 @@ background-color: rgb(255, 255, 255);</string>
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-       <x>50</x>
+       <x>0</x>
        <y>150</y>
-       <width>151</width>
+       <width>221</width>
        <height>61</height>
       </rect>
      </property>
@@ -396,7 +396,7 @@ background-color: rgb(255, 255, 255);</string>
       <rect>
        <x>10</x>
        <y>10</y>
-       <width>191</width>
+       <width>201</width>
        <height>121</height>
       </rect>
      </property>
@@ -445,8 +445,8 @@ background-color: rgb(255, 255, 255);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1788</width>
-     <height>21</height>
+     <width>1892</width>
+     <height>31</height>
     </rect>
    </property>
    <widget class="QMenu" name="menufile">

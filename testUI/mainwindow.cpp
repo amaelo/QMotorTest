@@ -33,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent)
 
      rec = false;
      inc = 0;
+     lambdaPrevious = 0;
 }
 
 
@@ -257,7 +258,11 @@ void MainWindow::on_startButton_clicked()
 
      rec = false;
      //    ui->labelPerim->setText(QString::(perim));
+#ifdef Q_OS_LINUX
      RS232com = new serialcommunication(this, "/dev/ttyACM0", 2000000);
+#else
+     RS232com = new serialcommunication(this, "COM3", 2000000);
+#endif
 
      RS232thread = new QThread(this);
      RS232com->moveToThread(RS232thread);
@@ -309,8 +314,8 @@ void MainWindow::on_plotButton_clicked()
      args << "/home/kama/applications/_myAppli/QMotorTest/testUI/getValues.py";
      recPath = "/home/kama/applications/_myAppli/QMotorTest/recorders";
 #else
-     QString pythonPath = "/home/kama/anaconda3/bin/python";
-     args << "/home/kama/applications/_myAppli/QMotorTest/testUI/getValues.py";
+     QString pythonPath = "C:/ProgramData/Anaconda3/python.exe";
+     args << "C:/Users/ama/Documents/qt-projects/QMotorTest/testUI/getValues.py";
 #endif
 
      QFileDialog dial(this,"Save recorder", recPath,"");
@@ -348,7 +353,13 @@ void MainWindow::on_plotButton_clicked()
      {
           dataX.append(strX[i].toDouble());
           dataY.append(strY1[i].toDouble());
-          dataY2.append(strY2[i].toDouble());
+          lambdaPrevious = strY2[i].toDouble();
+          if (strY2[i].toDouble() > 0)
+          {
+              dataY2.append(strY2[i].toDouble());
+              lambdaPrevious = strY2[i].toDouble();
+          }
+          else { dataY2.append(lambdaPrevious); }
      }
 
      QPen pen(Qt::red);
@@ -396,6 +407,13 @@ void MainWindow::on_plotButton_clicked()
 //          dataCurve2[i] = QCPCurveData(i, dataX[i], dataY2[i]);
      }
 
+     QVector<double> xo;
+     QVector<double> yo;
+     xo.append(10000);
+     yo.append(0);
+     //ui->customPlot->graph(0)->setValueAxis(ui->customPlot->yAxis);
+     ui->customPlot->graph(0)->setData(xo, yo, true);
+
      newCurve->data()->set(dataCurve);
      newCurve->setPen(pen);
 //     newCurve2->data()->set(dataCurve2);
@@ -410,7 +428,7 @@ void MainWindow::on_plotButton_clicked()
      ui->customPlot->xAxis->setRange(dataX[0] - 100, ui->customPlot->xAxis->range().maxRange + 500);
      ui->customPlot->xAxis->rescale(true);
      ui->customPlot->yAxis->rescale(true);
-     ui->customPlot->yAxis2->setRange(0, 5);
+     ui->customPlot->yAxis2->setRange(0, 1);
 
      ui->customPlot->replot();
 }

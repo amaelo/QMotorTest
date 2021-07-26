@@ -1,4 +1,4 @@
-import numpy
+# import numpy
 
 PI = 3.14159265
 INERTIA = 0.806
@@ -20,9 +20,12 @@ def getCalculations(filePath):
     
     lambdaValues = [ float(v) for v in list2 ]
     
-    # values = [ int(v) for v in list1 if int(v) > 200 ]
-    values = [ int(v) for v in list1]
-    time = numpy.arange(0, len(values), 1)
+    values = [ int(v) for v in list1 if int(v) > 200 ]
+    # values = [ int(v) for v in list1]
+    # time = numpy.arange(0, len(values), 1)
+    time = []
+    for i in range(0, len(values)): time.append(i)
+    
     time_s = [ val / 100 for val in time ]
     speed_kmh = [ 3.6 * (v / TOPS) * PERIM / SAMPLE for v in values ]
     
