@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
      , ui(new Ui::MainWindow)
 {
      ui->setupUi(this);
+     ui->centralwidget->layout()->setMargin(0);
 
      simu = new simulator(0, 100000);
      myThread = new QThread(this);

@@ -10,6 +10,7 @@
 class serialcommunication : public QObject
 {
      Q_OBJECT
+
 public:
      explicit serialcommunication(QObject *parent = nullptr, QString portName="", int baudRate=115200);
      void StartCommunication();
