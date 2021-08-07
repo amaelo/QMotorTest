@@ -20,6 +20,12 @@ void serialcommunication::StartCommunication()
 }
 
 
+QString serialcommunication::GetSerialPortAdress()
+{
+     return "serialPort->toto";
+}
+
+
 bool serialcommunication::initializeSerialPort(QString portName, int baudRate)
 {
      serialPort = new QSerialPort(this);
@@ -60,8 +66,21 @@ void serialcommunication::readData()
           frameRS232.remove(0,1);
           frameRS232.remove(frameRS232.size() - 1, 1);
 
-          emit newFrameRS232(frameRS232);
+          listFramesRS232 = frameRS232.split('_');
+
+          if(listFramesRS232[0] != nullptr)
+          {
+               for (int i = 0; i < listFramesRS232.length(); ++i)
+               {
+                    if (listFramesRS232[i] != "") { emit newFrameRS232(listFramesRS232[i]); }
+               }
+          }
+          else
+          {
+               if (frameRS232 != "") { emit newFrameRS232(frameRS232); }
 //          qDebug() << frameRS232;
+          }
+
      }
      else
      {

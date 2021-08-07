@@ -20,6 +20,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     mywidget.cpp \
+    operatingsystem.cpp \
     qcustomplot.cpp \
     serialcommunication.cpp \
     simulator.cpp
@@ -28,6 +29,7 @@ HEADERS += \
     calculation.h \
     mainwindow.h \
     mywidget.h \
+    operatingsystem.h \
     qcustomplot.h \
     serialcommunication.h \
     simulator.h

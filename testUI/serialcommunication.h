@@ -14,6 +14,7 @@ class serialcommunication : public QObject
 public:
      explicit serialcommunication(QObject *parent = nullptr, QString portName="", int baudRate=115200);
      void StartCommunication();
+     QString GetSerialPortAdress();
 
 
 private:
@@ -27,6 +28,7 @@ private slots:
 
 private:
      QByteArray frameRS232;
+     QList<QByteArray> listFramesRS232;
 
      QSerialPort *serialPort;
 

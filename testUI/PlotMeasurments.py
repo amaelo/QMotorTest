@@ -4,8 +4,8 @@ import Calculation as clc
 
 
 # folder = 'C:/Users/201011805/Documents/perso'
-# folder = "/home/kama/applications/_myAppli/QMotorTest/recorders/"
-folder = "C:/Users/ama/Documents/qt-projects/QMotorTest/recorders"
+folder = "/home/kama/applications/_myAppli/QMotorTest/recorders/"
+# folder = "C:/Users/ama/Documents/qt-projects/QMotorTest/recorders"
 rec1path = "toto12"
 rec2path = "toto11"
 rec3path = "toto10"
@@ -56,7 +56,7 @@ ax2.plot(speedEngine1, lambda1, color='tab:red', linewidth=0.5)
 ax2.plot(speedEngine2, lambda2, color='tab:blue', linewidth=0.5)
 ax2.plot(speedEngine3, lambda3, color='tab:green', linewidth=0.5)
 
-ax2.set_ylim([0, 1])
+ax2.set_ylim([0.8, 1.2])
 
 # fig.savefig("test.png")
 plt.show()

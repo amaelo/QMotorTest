@@ -2,4 +2,17 @@
     <qresource prefix="/new/prefix1">
         <file alias="img">IHM_Volvo_3.png</file>
     </qresource>
+    <qresource prefix="/icons">
+        <file>icons/adjustcurves.svg</file>
+        <file>icons/akonadi-phone-home.svg</file>
+        <file>icons/configure-shortcuts.svg</file>
+        <file>icons/dashboard-show.svg</file>
+        <file>icons/draw-cuboid.svg</file>
+        <file>icons/office-chart-area-stacked.svg</file>
+        <file>icons/media-record.png</file>
+        <file>icons/media-playback-start.png</file>
+        <file>icons/media-playback-stop.png</file>
+        <file>icons/window-close.png</file>
+        <file>icons/media-floppy.png</file>
+    </qresource>
 </RCC>

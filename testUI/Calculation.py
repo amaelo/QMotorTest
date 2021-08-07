@@ -1,4 +1,4 @@
-# import numpy
+import lambdaConversion
 
 PI = 3.14159265
 INERTIA = 0.806
@@ -9,6 +9,17 @@ WINDOW_SIZE = 30
 RATIO = 5
 
 
+lambdaVoltageTable = lambdaConversion.lambdaVoltage
+lambdaValuesTable = lambdaConversion.lambdaValue
+
+
+def getLlambdaValue(voltage):
+    for i in range(0, len(lambdaVoltageTable)):
+        if voltage > lambdaVoltageTable[i]:
+            return lambdaValuesTable[i]
+            break
+    
+
 def getCalculations(filePath):
     
     list1 = []
@@ -18,9 +29,10 @@ def getCalculations(filePath):
     list1 = [ v.split(',')[0] for v in lines ]
     list2 = [ v.split(',')[1] for v in lines ]
     
-    lambdaValues = [ float(v) for v in list2 ]
+    lambdaValues_V = [ float(v) for v in list2 ]
+    # lambdaValues = [ getLlambdaValue(v) for v in lambdaValues_V ]
     
-    values = [ int(v) for v in list1 if int(v) > 200 ]
+    values = [ int(v) for v in list1 if int(v) > 20 ]
     # values = [ int(v) for v in list1]
     # time = numpy.arange(0, len(values), 1)
     time = []
@@ -105,4 +117,4 @@ def getCalculations(filePath):
         
     ##############################################################################################        
     
-    return speedEngine_rpm, power_corr_hp, lambdaValues, power_hp, correction_ramp_hp
+    return speedEngine_rpm, power_corr_hp, lambdaValues_V, power_hp, correction_ramp_hp
